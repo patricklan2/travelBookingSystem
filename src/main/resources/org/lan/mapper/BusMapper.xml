@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.lan.mapper.BusMapper">
+  <resultMap id="BaseResultMap" type="org.lan.pojo.Bus">
+    <id column="location" jdbcType="VARCHAR" property="location" />
+    <result column="price" jdbcType="INTEGER" property="price" />
+    <result column="num_bus" jdbcType="INTEGER" property="numBus" />
+    <result column="num_seat" jdbcType="INTEGER" property="numSeat" />
+    <result column="num_avail" jdbcType="INTEGER" property="numAvail" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from bus
+    where location = #{location,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.lan.pojo.Bus">
+    insert into bus (location, price, num_bus, num_seat, num_avail)
+    values (#{location,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER}, #{numBus,jdbcType=INTEGER}, 
+      #{numSeat,jdbcType=INTEGER}, #{numAvail,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="org.lan.pojo.Bus">
+    update bus
+    set price = #{price,jdbcType=INTEGER},
+      num_bus = #{numBus,jdbcType=INTEGER},
+      num_seat = #{numSeat,jdbcType=INTEGER},
+      num_avail = #{numAvail,jdbcType=INTEGER}
+    where location = #{location,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select location, price, num_bus, num_seat, num_avail
+    from bus
+    where location = #{location,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select location, price, num_bus, num_seat, num_avail
+    from bus
+  </select>
+</mapper>

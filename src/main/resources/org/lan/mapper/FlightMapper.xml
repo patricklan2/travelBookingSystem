@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.lan.mapper.FlightMapper">
+  <resultMap id="BaseResultMap" type="org.lan.pojo.Flight">
+    <id column="flight_num" jdbcType="VARCHAR" property="flightNum" />
+    <result column="price" jdbcType="INTEGER" property="price" />
+    <result column="num_seats" jdbcType="INTEGER" property="numSeats" />
+    <result column="num_avail" jdbcType="INTEGER" property="numAvail" />
+    <result column="from_city" jdbcType="VARCHAR" property="fromCity" />
+    <result column="arrive_city" jdbcType="VARCHAR" property="arriveCity" />
+    <result column="time" jdbcType="VARCHAR" property="time" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from flight
+    where flight_num = #{flightNum,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.lan.pojo.Flight">
+    insert into flight (flight_num, price, num_seats, 
+      num_avail, from_city, arrive_city, 
+      time)
+    values (#{flightNum,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER}, #{numSeats,jdbcType=INTEGER}, 
+      #{numAvail,jdbcType=INTEGER}, #{fromCity,jdbcType=VARCHAR}, #{arriveCity,jdbcType=VARCHAR}, 
+      #{time,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="org.lan.pojo.Flight">
+    update flight
+    set price = #{price,jdbcType=INTEGER},
+      num_seats = #{numSeats,jdbcType=INTEGER},
+      num_avail = #{numAvail,jdbcType=INTEGER},
+      from_city = #{fromCity,jdbcType=VARCHAR},
+      arrive_city = #{arriveCity,jdbcType=VARCHAR},
+      time = #{time,jdbcType=VARCHAR}
+    where flight_num = #{flightNum,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select flight_num, price, num_seats, num_avail, from_city, arrive_city, time
+    from flight
+    where flight_num = #{flightNum,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select flight_num, price, num_seats, num_avail, from_city, arrive_city, time
+    from flight
+  </select>
+</mapper>

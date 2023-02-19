@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.lan.mapper.HotelMapper">
+  <resultMap id="BaseResultMap" type="org.lan.pojo.Hotel">
+    <id column="location" jdbcType="VARCHAR" property="location" />
+    <result column="price" jdbcType="INTEGER" property="price" />
+    <result column="num_room" jdbcType="INTEGER" property="numRoom" />
+    <result column="num_avail" jdbcType="INTEGER" property="numAvail" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from hotel
+    where location = #{location,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.lan.pojo.Hotel">
+    insert into hotel (location, price, num_room, 
+      num_avail)
+    values (#{location,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER}, #{numRoom,jdbcType=INTEGER}, 
+      #{numAvail,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="org.lan.pojo.Hotel">
+    update hotel
+    set price = #{price,jdbcType=INTEGER},
+      num_room = #{numRoom,jdbcType=INTEGER},
+      num_avail = #{numAvail,jdbcType=INTEGER}
+    where location = #{location,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select location, price, num_room, num_avail
+    from hotel
+    where location = #{location,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select location, price, num_room, num_avail
+    from hotel
+  </select>
+</mapper>

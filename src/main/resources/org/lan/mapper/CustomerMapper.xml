@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.lan.mapper.CustomerMapper">
+  <resultMap id="BaseResultMap" type="org.lan.pojo.Customer">
+    <id column="customer_name" jdbcType="VARCHAR" property="customerName" />
+    <result column="customer_id" jdbcType="VARCHAR" property="customerId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from customer
+    where customer_name = #{customerName,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.lan.pojo.Customer">
+    insert into customer (customer_name, customer_id)
+    values (#{customerName,jdbcType=VARCHAR}, #{customerId,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="org.lan.pojo.Customer">
+    update customer
+    set customer_id = #{customerId,jdbcType=VARCHAR}
+    where customer_name = #{customerName,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select customer_name, customer_id
+    from customer
+    where customer_name = #{customerName,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select customer_name, customer_id
+    from customer
+  </select>
+</mapper>

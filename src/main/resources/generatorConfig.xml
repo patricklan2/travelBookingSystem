@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <context id="MysqlTables" targetRuntime="MyBatis3Simple">
+       <plugin type = "org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!-- jdbc链接信息 -->
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/travel_booking?useUnicode=true;characterEncoding=UTF-8;"
+                        userId="root" password="root">
+        </jdbcConnection>
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- 生成POJO类的位置 -->
+        <javaModelGenerator targetPackage="org.lan.pojo"
+                            targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- mapper映射文件生成的位置 -->
+        <sqlMapGenerator targetPackage="org.lan.mapper"
+                         targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!-- mapper接口生成的位置 -->
+        <javaClientGenerator type="xmlMapper"
+                             targetPackage="org.lan.mapper"
+                             targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!-- 指定要生成的表 -->
+        <!--
+        <table tableName="rule_result" >
+            <property name="useActualColumnNames" value="true"/>-->
+            <!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--</table>-->
+
+        <!--
+        <table tableName = "bus" domainObjectName = "Bus"/>
+        <table tableName="customer" domainObjectName="Customer"/>
+        <table tableName="flight" domainObjectName="Flight"/>
+        <table tableName="hotel" domainObjectName="Hotel"/>-->
+        <table tableName="reservation" domainObjectName="Reservation"/>
+
+    </context>
+</generatorConfiguration>
